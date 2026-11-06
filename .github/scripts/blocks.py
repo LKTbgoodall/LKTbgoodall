@@ -110,7 +110,7 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
     <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="82" stroke-opacity=".2" style="animation-delay:.6s"/>
     <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
   </g>
-  <g class="float">
+  <g class="in">
     <circle cx="{w / 2}" cy="{ch / 2}" r="60" fill="url(#halo)"/>
     <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>
   </g>
@@ -123,10 +123,8 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
   <text x="45" y="{ch + 96}" style="font: 600 14px {SANS}; fill: {TEXT}">{escape(lang)}</text>
   <svg class="arrow" x="{w - 46}" y="{ch + 24}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
 </g>"""
-    style = """.arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }
-  .float { animation: float 4s ease-in-out infinite; } @keyframes float { 50% { transform: translateY(-6px); } }
-  .solve { stroke-dasharray: 1 1; animation: solve 5s ease-in-out infinite; } @keyframes solve { 0% { stroke-dashoffset: 1; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
-  .ring { transform-box: fill-box; transform-origin: center; animation: ring 3.6s ease-in-out infinite; } @keyframes ring { 50% { transform: scale(1.06); opacity: .5; } }"""
+    style = """.solve { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: solve 2.4s ease-in-out .6s forwards; } @keyframes solve { to { stroke-dashoffset: 0; } }
+  .ring { transform-box: fill-box; transform-origin: center; animation: ring 1s ease-out backwards; } @keyframes ring { from { transform: scale(.6); opacity: 0; } }"""
     (ASSETS / "projets" / f"{slug}.svg").write_text(frame(w, h, body, style))
 
 
