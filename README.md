@@ -58,16 +58,10 @@
 <div align="center">
 
 <!-- Générées par .github/workflows/stats.yml -->
-<img height="180" src="profile-summary-card-output/tokyonight/3-stats.svg" />
-<img height="180" src="profile-summary-card-output/tokyonight/2-most-commit-language.svg" />
+<img height="190" src="stats/overview.svg" />
+<img height="190" src="stats/languages.svg" />
 
 <img src="https://streak-stats.demolab.com?user=LKTbgoodall&theme=tokyonight&hide_border=true&ring=A78BFA&fire=A78BFA&currStreakLabel=A78BFA" />
-
-<details>
-<summary><b>🕒 Quand est-ce que je code ?</b></summary>
-<br>
-<img src="profile-summary-card-output/tokyonight/4-productive-time.svg" />
-</details>
 
 </div>
 
