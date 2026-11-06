@@ -69,9 +69,12 @@ def icon_block(items, path):
         cx = 30 + slot * (i + .5)
         body.append(
             f'<g class="in" style="animation-delay:{i * .08:.2f}s">'
-            f'<svg x="{cx - size / 2:.1f}" y="30" width="{size}" height="{size}" viewBox="0 0 256 256">{icon(name, f"i{i}_")}</svg>'
+            f'<g class="bob" style="animation-delay:{.8 + i * .18:.2f}s">'
+            f'<svg x="{cx - size / 2:.1f}" y="30" width="{size}" height="{size}" viewBox="0 0 256 256">{icon(name, f"i{i}_")}</svg></g>'
             f'<text x="{cx:.1f}" y="118" text-anchor="middle" style="font: 600 14px {SANS}; fill: {TEXT}">{escape(label)}</text></g>')
-    path.write_text(frame(w, h, "\n".join(body)))
+    # vague continue : chaque icône saute un peu après sa voisine
+    style = ".bob { animation: bob 3s ease-in-out infinite; } @keyframes bob { 0%, 30%, 100% { transform: translateY(0); } 15% { transform: translateY(-7px); } }"
+    path.write_text(frame(w, h, "\n".join(body), style))
 
 
 def logo(name):
