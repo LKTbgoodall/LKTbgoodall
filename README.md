@@ -57,11 +57,8 @@
 
 <div align="center">
 
-<!-- Générées par .github/workflows/stats.yml sur la branche "stats" -->
-<img height="190" src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/stats/overview.svg" />
-<img height="190" src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/stats/languages.svg" />
-
-<img src="https://streak-stats.demolab.com?user=LKTbgoodall&theme=tokyonight&hide_border=true&ring=A78BFA&fire=A78BFA&currStreakLabel=A78BFA" />
+<!-- Générée par .github/workflows/stats.yml sur la branche "stats" -->
+<img src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/stats/card.svg" width="100%" alt="Stats" />
 
 </div>
 
