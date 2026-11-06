@@ -6,10 +6,13 @@
 <style>
   .in { animation: in .6s cubic-bezier(.2,.9,.3,1.2) backwards; transform-box: fill-box; transform-origin: center; }
   @keyframes in { from { opacity: 0; transform: translateY(14px) scale(.85); } }
-  .solve { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: solve 2.4s ease-in-out .6s forwards; } @keyframes solve { to { stroke-dashoffset: 0; } }
+  .arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }
+  .float { animation: float 4s ease-in-out infinite; } @keyframes float { 50% { transform: translateY(-6px); } }
+  .ring { transform-box: fill-box; transform-origin: center; animation: ring 3.6s ease-in-out infinite; } @keyframes ring { 50% { transform: scale(1.06); opacity: .5; } }
+  .solve { stroke-dasharray: 1 1; animation: solve 5s ease-in-out infinite; } @keyframes solve { 0% { stroke-dashoffset: 1; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
   .rise { animation: rise .8s cubic-bezier(.2,.9,.3,1.1) backwards; } @keyframes rise { from { transform: translateY(46px); opacity: 0; } }
-  .spark { transform-box: fill-box; transform-origin: center; animation: spark .6s ease-out backwards; } @keyframes spark { from { transform: scale(0) rotate(-90deg); opacity: 0; } }
-  .ring { transform-box: fill-box; transform-origin: center; animation: ring 1s ease-out backwards; } @keyframes ring { from { transform: scale(.6); opacity: 0; } }
+  .spark { transform-box: fill-box; transform-origin: center; animation: spark .6s ease-out backwards, twinkle 2.4s ease-in-out 1.8s infinite; }
+  @keyframes spark { from { transform: scale(0) rotate(-90deg); opacity: 0; } } @keyframes twinkle { 50% { transform: scale(.55); opacity: .5; } }
 </style>
 <rect width="440" height="260" rx="18" fill="#0d1117"/>
 <rect width="440" height="260" rx="18" fill="url(#dots)"/>
@@ -27,7 +30,7 @@
     <circle class="ring" cx="220.0" cy="75.0" r="82" stroke-opacity=".2" style="animation-delay:.6s"/>
     <circle class="ring" cx="220.0" cy="75.0" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
   </g>
-  <g class="in">
+  <g class="float">
     <circle cx="220.0" cy="75.0" r="60" fill="url(#halo)"/>
     <svg x="184.0" y="39.0" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
   </g>

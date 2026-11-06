@@ -5,7 +5,7 @@
   </linearGradient>
   <linearGradient id="shine" gradientUnits="userSpaceOnUse" x1="-220" y1="0" x2="0" y2="0">
     <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
-    <animateTransform attributeName="gradientTransform" type="translate" values="0;1340" begin="2.6s" dur="2.6s" fill="freeze"/>
+    <animateTransform attributeName="gradientTransform" type="translate" values="0;1340;1340" keyTimes="0;.45;1" begin="2.6s" dur="6s" repeatCount="indefinite"/>
   </linearGradient>
   <clipPath id="type"><rect class="tw" x="254" y="226" width="0" height="32"/></clipPath>
 </defs>
@@ -14,10 +14,11 @@
   @keyframes draw { to { stroke-dashoffset: 0; } }
   .fill { animation: show .7s ease-out 1.5s backwards; }
   @keyframes show { from { opacity: 0; } }
-  .glow { opacity: .7; animation: show 1s ease-out 1.6s backwards; }
+  .glow { opacity: .55; animation: show 1s ease-out 1.6s backwards, pulse 4s ease-in-out 2.6s infinite; }
+  @keyframes pulse { 50% { opacity: .9; } }
   .tw { animation: type 1.5s steps(33) 2s forwards; }
   @keyframes type { to { width: 420px; } }
-  .cur { animation: move 1.5s steps(33) 2s forwards, blink 1s step-end 3.5s 5; }
+  .cur { animation: move 1.5s steps(33) 2s forwards, blink 1s step-end 3.5s infinite; }
   @keyframes move { to { transform: translateX(420px); } }
   @keyframes blink { 50% { opacity: 0; } }
 </style>
