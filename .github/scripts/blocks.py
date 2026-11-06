@@ -15,19 +15,19 @@ LANGAGES = [("cs", "C#"), ("lua", "Lua"), ("c", "C"), ("rust", "Rust"),
             ("py", "Python"), ("js", "JavaScript"), ("html", "HTML"), ("css", "CSS")]
 OUTILS = [("unity", "Unity"), ("robloxstudio", "Roblox Studio"), ("@fivem", "FiveM"), ("blender", "Blender"),
           ("git", "Git"), ("vscode", "VSCode"), ("arch", "Arch Linux")]
-# (fichier, titre, description, icône lucide, langage, couleur du langage)
+# (fichier, titre, description, logo, couleur du visuel, langage, couleur du langage)
 PROJETS = [
-    ("fivem-jobs", "FiveM Scripts Jobs", "Scripts de métiers pour serveur FiveM", "briefcase", "Lua", "#6b7cff"),
-    ("discord-bot-eti", "Discord Bot ETI", "Bot Discord pour le référencement ETI", "bot", "JavaScript", "#f1e05a"),
-    ("pokerogue-extension", "PokeRogue Extension", "Extension navigateur pour PokeRogue", "puzzle", "JavaScript", "#f1e05a"),
-    ("portfolio", "Portfolio", "Mon portfolio", "globe", "HTML", "#e34c26"),
+    ("fivem-jobs", "FiveM Scripts Jobs", "Scripts de métiers pour serveur FiveM", "si:fivem", "#F40552", "Lua", "#6b7cff"),
+    ("discord-bot-eti", "Discord Bot ETI", "Bot Discord pour le référencement ETI", "si:discord", "#5865F2", "JavaScript", "#f1e05a"),
+    ("pokerogue-extension", "PokeRogue Extension", "Extension navigateur pour PokeRogue", "pokeball", "#EF4444", "JavaScript", "#f1e05a"),
+    ("portfolio", "Portfolio", "Mon portfolio", "browser", "#2DD4BF", "HTML", "#e34c26"),
 ]
 
 TEXT, MUTED = "#E2E8F0", "#8B93B5"
 SANS = "'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif"
 
-DEFS = """<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C084FC"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
-  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#8B5CF6" fill-opacity=".14"/></pattern>"""
+DEFS = """<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5F3FC"/><stop offset=".5" stop-color="#2DD4BF"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#2DD4BF" fill-opacity=".14"/></pattern>"""
 
 
 def frame(w, h, body, style=""):
@@ -74,23 +74,55 @@ def icon_block(items, path):
     path.write_text(frame(w, h, "\n".join(body)))
 
 
-def lucide(name):
-    src = fetch(f"https://unpkg.com/lucide-static@0.460.0/icons/{name}.svg")
-    return re.sub(r"^.*?<svg[^>]*>|</svg>\s*$", "", src.strip(), flags=re.S)
+def logo(name):
+    """Logo en viewBox 24x24 : Simple Icons ("si:nom") ou dessin maison."""
+    if name.startswith("si:"):
+        src = fetch(f"https://cdn.simpleicons.org/{name[3:]}/ffffff")
+        return "".join(re.findall(r"<path[^>]*/>", src))
+    return {
+        "pokeball": '<circle cx="12" cy="12" r="10.5" fill="#fff"/><path d="M1.5 12a10.5 10.5 0 0 1 21 0z" fill="#EF4444"/>'
+                    '<rect x="1.5" y="10.9" width="21" height="2.2" fill="#0d1117"/>'
+                    '<circle cx="12" cy="12" r="3.6" fill="#0d1117"/><circle cx="12" cy="12" r="2.2" fill="#fff"/>',
+        "browser": '<rect x="1.5" y="3" width="21" height="18" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/>'
+                   '<path d="M1.5 7.5h21" stroke="#fff" stroke-width="1.6"/>'
+                   '<circle cx="4.5" cy="5.25" r=".8" fill="#fff"/><circle cx="7" cy="5.25" r=".8" fill="#fff"/><circle cx="9.5" cy="5.25" r=".8" fill="#fff"/>'
+                   '<rect x="4.5" y="10.5" width="7" height="7.5" rx="1" fill="#fff" fill-opacity=".9"/>'
+                   '<path d="M14 11.5h5.5M14 14.25h5.5M14 17h3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
+    }[name]
 
 
-def project_card(slug, title, desc, ico, lang, color, delay):
-    w, h = 440, 150
-    body = f"""<g class="in" style="animation-delay:{delay:.2f}s">
-  <rect x="26" y="26" width="52" height="52" rx="14" fill="#8B5CF6" fill-opacity=".12" stroke="url(#g)" stroke-opacity=".6"/>
-  <svg x="38" y="38" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{lucide(ico)}</svg>
-  <text x="96" y="48" style="font: 700 20px {SANS}; fill: {TEXT}">{escape(title)}</text>
-  <text x="96" y="74" style="font: 400 15px {SANS}; fill: {MUTED}">{escape(desc)}</text>
-  <circle cx="102" cy="117" r="6" fill="{color}"/>
-  <text x="115" y="122" style="font: 600 14px {SANS}; fill: {TEXT}">{escape(lang)}</text>
-  <svg class="arrow" x="396" y="22" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
+    w, h, ch = 440, 260, 150  # ch : hauteur du visuel
+    body = f"""<defs>
+  <clipPath id="cover"><path d="M18 0H{w - 18}a18 18 0 0 1 18 18V{ch}H0V18A18 18 0 0 1 18 0z"/></clipPath>
+  <radialGradient id="spot" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="{accent}" stop-opacity=".55"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></radialGradient>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<g clip-path="url(#cover)">
+  <rect width="{w}" height="{ch}" fill="#0a0f1a"/>
+  <rect width="{w}" height="{ch}" fill="url(#spot)"/>
+  <rect width="{w}" height="{ch}" fill="url(#dots)"/>
+  <g fill="none" stroke="{accent}">
+    <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="52" stroke-opacity=".35"/>
+    <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="82" stroke-opacity=".2" style="animation-delay:.6s"/>
+    <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
+  </g>
+  <g class="float">
+    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="{accent}" filter="url(#blur)" opacity=".8">{logo(logo_name)}</svg>
+    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff">{logo(logo_name)}</svg>
+  </g>
+</g>
+<rect y="{ch}" width="{w}" height="1.5" fill="url(#g)" opacity=".6"/>
+<g class="in" style="animation-delay:{delay:.2f}s">
+  <text x="26" y="{ch + 42}" style="font: 700 20px {SANS}; fill: {TEXT}">{escape(title)}</text>
+  <text x="26" y="{ch + 68}" style="font: 400 15px {SANS}; fill: {MUTED}">{escape(desc)}</text>
+  <circle cx="32" cy="{ch + 91}" r="6" fill="{color}"/>
+  <text x="45" y="{ch + 96}" style="font: 600 14px {SANS}; fill: {TEXT}">{escape(lang)}</text>
+  <svg class="arrow" x="{w - 46}" y="{ch + 24}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
 </g>"""
-    style = ".arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }"
+    style = """.arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }
+  .float { animation: float 4s ease-in-out infinite; } @keyframes float { 50% { transform: translateY(-6px); } }
+  .ring { transform-box: fill-box; transform-origin: center; animation: ring 3.6s ease-in-out infinite; } @keyframes ring { 50% { transform: scale(1.06); opacity: .5; } }"""
     (ASSETS / "projets" / f"{slug}.svg").write_text(frame(w, h, body, style))
 
 

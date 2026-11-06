@@ -1,26 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="440" height="150" viewBox="0 0 440 150">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="440" height="260" viewBox="0 0 440 260">
 <defs>
-  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C084FC"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
-  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#8B5CF6" fill-opacity=".14"/></pattern>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5F3FC"/><stop offset=".5" stop-color="#2DD4BF"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#2DD4BF" fill-opacity=".14"/></pattern>
 </defs>
 <style>
   .in { animation: in .6s cubic-bezier(.2,.9,.3,1.2) backwards; transform-box: fill-box; transform-origin: center; }
   @keyframes in { from { opacity: 0; transform: translateY(14px) scale(.85); } }
   .arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }
+  .float { animation: float 4s ease-in-out infinite; } @keyframes float { 50% { transform: translateY(-6px); } }
+  .ring { transform-box: fill-box; transform-origin: center; animation: ring 3.6s ease-in-out infinite; } @keyframes ring { 50% { transform: scale(1.06); opacity: .5; } }
 </style>
-<rect width="440" height="150" rx="18" fill="#0d1117"/>
-<rect width="440" height="150" rx="18" fill="url(#dots)"/>
-<g class="in" style="animation-delay:0.00s">
-  <rect x="26" y="26" width="52" height="52" rx="14" fill="#8B5CF6" fill-opacity=".12" stroke="url(#g)" stroke-opacity=".6"/>
-  <svg x="38" y="38" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-  <rect width="20" height="14" x="2" y="6" rx="2" />
-</svg>
-  <text x="96" y="48" style="font: 700 20px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #E2E8F0">FiveM Scripts Jobs</text>
-  <text x="96" y="74" style="font: 400 15px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #8B93B5">Scripts de métiers pour serveur FiveM</text>
-  <circle cx="102" cy="117" r="6" fill="#6b7cff"/>
-  <text x="115" y="122" style="font: 600 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #E2E8F0">Lua</text>
-  <svg class="arrow" x="396" y="22" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+<rect width="440" height="260" rx="18" fill="#0d1117"/>
+<rect width="440" height="260" rx="18" fill="url(#dots)"/>
+<defs>
+  <clipPath id="cover"><path d="M18 0H422a18 18 0 0 1 18 18V150H0V18A18 18 0 0 1 18 0z"/></clipPath>
+  <radialGradient id="spot" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#F40552" stop-opacity=".55"/><stop offset="1" stop-color="#F40552" stop-opacity="0"/></radialGradient>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<g clip-path="url(#cover)">
+  <rect width="440" height="150" fill="#0a0f1a"/>
+  <rect width="440" height="150" fill="url(#spot)"/>
+  <rect width="440" height="150" fill="url(#dots)"/>
+  <g fill="none" stroke="#F40552">
+    <circle class="ring" cx="220.0" cy="75.0" r="52" stroke-opacity=".35"/>
+    <circle class="ring" cx="220.0" cy="75.0" r="82" stroke-opacity=".2" style="animation-delay:.6s"/>
+    <circle class="ring" cx="220.0" cy="75.0" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
+  </g>
+  <g class="float">
+    <svg x="184.0" y="39.0" width="72" height="72" viewBox="0 0 24 24" fill="#F40552" filter="url(#blur)" opacity=".8"><path d="M22.4 24h-5.225c-.117 0-.455-1.127-1.026-3.375-1.982-6.909-3.124-10.946-3.417-12.12l3.37-3.325h.099c.454 1.42 2.554 7.676 6.299 18.768ZM12.342 7.084h-.048a3.382 3.385 0 0 1-.098-.492v-.098a102.619 102.715 0 0 1 3.272-3.275c.13.196.196.356.196.491v.05a140.694 140.826 0 0 1-3.322 3.324ZM5.994 10.9h-.05c.67-2.12 1.076-3.209 1.223-3.275L14.492.343c.08 0 .258.524.533 1.562zm1.37-4.014h-.05C8.813 2.342 9.612.048 9.71 0h4.495v.05a664.971 664.971 0 0 1-6.841 6.839Zm-2.69 7.874h-.05c.166-.798.554-1.418 1.174-1.855a312.918 313.213 0 0 1 5.71-5.717h.05c-.117.672-.375 1.175-.781 1.52zM1.598 24l-.098-.05c1.399-4.172 2.148-6.322 2.248-6.45l6.74-6.694v.05C10.232 11.88 8.974 16.263 6.73 24Z"/></svg>
+    <svg x="184.0" y="39.0" width="72" height="72" viewBox="0 0 24 24" fill="#fff"><path d="M22.4 24h-5.225c-.117 0-.455-1.127-1.026-3.375-1.982-6.909-3.124-10.946-3.417-12.12l3.37-3.325h.099c.454 1.42 2.554 7.676 6.299 18.768ZM12.342 7.084h-.048a3.382 3.385 0 0 1-.098-.492v-.098a102.619 102.715 0 0 1 3.272-3.275c.13.196.196.356.196.491v.05a140.694 140.826 0 0 1-3.322 3.324ZM5.994 10.9h-.05c.67-2.12 1.076-3.209 1.223-3.275L14.492.343c.08 0 .258.524.533 1.562zm1.37-4.014h-.05C8.813 2.342 9.612.048 9.71 0h4.495v.05a664.971 664.971 0 0 1-6.841 6.839Zm-2.69 7.874h-.05c.166-.798.554-1.418 1.174-1.855a312.918 313.213 0 0 1 5.71-5.717h.05c-.117.672-.375 1.175-.781 1.52zM1.598 24l-.098-.05c1.399-4.172 2.148-6.322 2.248-6.45l6.74-6.694v.05C10.232 11.88 8.974 16.263 6.73 24Z"/></svg>
+  </g>
 </g>
-<rect x="1" y="1" width="438" height="148" rx="17" fill="none" stroke="url(#g)" stroke-opacity=".5" stroke-width="2"/>
+<rect y="150" width="440" height="1.5" fill="url(#g)" opacity=".6"/>
+<g class="in" style="animation-delay:0.00s">
+  <text x="26" y="192" style="font: 700 20px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #E2E8F0">FiveM Scripts Jobs</text>
+  <text x="26" y="218" style="font: 400 15px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #8B93B5">Scripts de métiers pour serveur FiveM</text>
+  <circle cx="32" cy="241" r="6" fill="#6b7cff"/>
+  <text x="45" y="246" style="font: 600 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: #E2E8F0">Lua</text>
+  <svg class="arrow" x="394" y="174" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+</g>
+<rect x="1" y="1" width="438" height="258" rx="17" fill="none" stroke="url(#g)" stroke-opacity=".5" stroke-width="2"/>
 </svg>

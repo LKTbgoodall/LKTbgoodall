@@ -10,7 +10,7 @@ TOKEN = os.environ.get("GITHUB_TOKEN")
 EXCLUDE = {"Roff", "Makefile"}  # langages à ne pas compter
 
 W, H = 900, 300
-TITLE, TEXT, MUTED, LINE = "#A78BFA", "#E2E8F0", "#8B93B5", "#2a2e45"
+TITLE, TEXT, MUTED, LINE = "#2DD4BF", "#E2E8F0", "#8B93B5", "#2a2e45"
 LANG_COLORS = {
     "C#": "#3fb950", "Lua": "#6b7cff", "C": "#a8b1c2", "JavaScript": "#f1e05a",
     "TypeScript": "#3178c6", "HTML": "#e34c26", "CSS": "#8b5cf6", "Python": "#3572A5",
@@ -118,9 +118,9 @@ def render(d):
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <defs>
-  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C084FC"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#3B82F6"/></linearGradient>
-  <linearGradient id="sep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8B5CF6" stop-opacity="0"/><stop offset=".5" stop-color="#8B5CF6" stop-opacity=".45"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></linearGradient>
-  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#8B5CF6" fill-opacity=".14"/></pattern>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5F3FC"/><stop offset=".5" stop-color="#2DD4BF"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+  <linearGradient id="sep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2DD4BF" stop-opacity="0"/><stop offset=".5" stop-color="#2DD4BF" stop-opacity=".45"/><stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/></linearGradient>
+  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#2DD4BF" fill-opacity=".14"/></pattern>
 </defs>
 <style>
   .h {{ font: 700 13px 'JetBrains Mono', 'Fira Code', Consolas, monospace; fill: {TITLE}; letter-spacing: 2.5px; }}
