@@ -73,6 +73,7 @@ def collect(user):
         for w in cal["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]:
             days += [(d["date"], d["contributionCount"]) for d in w["contributionDays"]]
     days = sorted(d for d in dict(days).items() if d[0] <= dt.date.today().isoformat())
+    data["days"] = days
     data["current"], data["longest"] = streaks(days)
     data["total"] = sum(n for _, n in days)
     data["commits"] = u["contributionsCollection"]["totalCommitContributions"]
@@ -148,8 +149,77 @@ def render(d):
 </svg>'''
 
 
+LEVELS = ["#1b2a33", "#134e4a", "#0f766e", "#14b8a6", "#5eead4"]
+
+
+def shade(color, k):
+    r, g, b = (int(color[i:i + 2], 16) for i in (1, 3, 5))
+    return f"#{int(r * k):02x}{int(g * k):02x}{int(b * k):02x}"
+
+
+def render_contrib(days):
+    """Graphique 3D isométrique des 12 derniers mois."""
+    counts, today = dict(days), dt.date.today()
+    start = today - dt.timedelta(days=364)
+    start -= dt.timedelta(days=(start.weekday() + 1) % 7)  # recule au dimanche
+    cells = []
+    for i in range((today - start).days + 1):
+        day = start + dt.timedelta(days=i)
+        cells.append((i // 7, (day.weekday() + 1) % 7, counts.get(day.isoformat(), 0)))
+    top = max((n for *_, n in cells), default=0) or 1
+
+    W, H = 900, 470
+    U, V = (13.5, 3.6), (-7.0, 7.5)  # axe des semaines, axe des jours
+    ox, oy = 117, 170
+    gap = .8
+    boxes = []
+    for w, d, n in sorted(cells, key=lambda c: c[0] * U[1] + c[1] * V[1]):
+        lvl = 0 if n == 0 else min(4, 1 + int(n / top * 4 - 1e-9))
+        h = 0 if n == 0 else 6 + (n / top) ** .6 * 70
+        ax, ay = ox + w * U[0] + d * V[0], oy + w * U[1] + d * V[1]
+        u, v = (U[0] * gap, U[1] * gap), (V[0] * gap, V[1] * gap)
+        A, B, C, D = (ax, ay), (ax + u[0], ay + u[1]), (ax + u[0] + v[0], ay + u[1] + v[1]), (ax + v[0], ay + v[1])
+        up = lambda p: (p[0], p[1] - h)
+        poly = lambda pts, c: '<path d="M' + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + f'Z" fill="{c}"/>'
+        col = LEVELS[lvl]
+        faces = poly([up(A), up(B), up(C), up(D)], col)
+        if h:
+            faces = poly([D, C, up(C), up(D)], shade(col, .55)) + poly([B, C, up(C), up(B)], shade(col, .75)) + faces
+        boxes.append(f'<g class="b" style="animation-delay:{w * .025:.2f}s">{faces}</g>')
+
+    year = [n for _, _, n in cells]
+    best = max(year, default=0)
+    weeks = [sum(year[i:i + 7]) for i in range(0, len(year), 7)]
+    legend = "".join(f'<rect x="{758 + i * 18}" y="{H - 44}" width="13" height="13" rx="3" fill="{c}"/>' for i, c in enumerate(LEVELS))
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A5F3FC"/><stop offset=".5" stop-color="#2DD4BF"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#2DD4BF" fill-opacity=".1"/></pattern>
+</defs>
+<style>
+  .h {{ font: 700 13px 'JetBrains Mono', 'Fira Code', Consolas, monospace; fill: {TITLE}; letter-spacing: 2.5px; }}
+  .l {{ font: 400 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: {MUTED}; }}
+  .v {{ font: 700 15px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: {TEXT}; }}
+  .big {{ font: 800 44px 'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif; fill: url(#g); }}
+  .b {{ transform-box: fill-box; transform-origin: 50% 100%; animation: grow .7s cubic-bezier(.2,.9,.3,1.15) backwards; }}
+  @keyframes grow {{ from {{ transform: scaleY(0); opacity: 0; }} }}
+</style>
+<rect width="{W}" height="{H}" rx="18" fill="#0d1117"/>
+<rect width="{W}" height="{H}" rx="18" fill="url(#dots)"/>
+<text x="36" y="50" class="h">CONTRIBUTIONS</text>
+<text x="864" y="62" class="big" text-anchor="end">{sum(year)}</text>
+<text x="864" y="86" class="l" text-anchor="end">sur les 12 derniers mois</text>
+{"".join(boxes)}
+<text x="36" y="{H - 62}" class="l">Meilleur jour</text><text x="36" y="{H - 38}" class="v">{best} contributions</text>
+<text x="200" y="{H - 62}" class="l">Meilleure semaine</text><text x="200" y="{H - 38}" class="v">{max(weeks, default=0)} contributions</text>
+<text x="748" y="{H - 33}" class="l" text-anchor="end">Moins</text>{legend}<text x="854" y="{H - 33}" class="l">Plus</text>
+<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="17" fill="none" stroke="url(#g)" stroke-opacity=".5" stroke-width="2"/>
+</svg>'''
+
+
 if __name__ == "__main__":
     os.makedirs("stats", exist_ok=True)
     data = collect(sys.argv[1])
     open("stats/card.svg", "w").write(render(data))
-    print("ok:", {k: v for k, v in data.items() if k != "langs"})
+    open("stats/contrib.svg", "w").write(render_contrib(data.get("days", [])))
+    print("ok:", {k: v for k, v in data.items() if k not in ("langs", "days")})

@@ -19,7 +19,7 @@ OUTILS = [("unity", "Unity"), ("robloxstudio", "Roblox Studio"), ("@fivem", "Fiv
 PROJETS = [
     ("fivem-jobs", "FiveM Scripts Jobs", "Scripts de métiers pour serveur FiveM", "si:fivem", "#F40552", "Lua", "#6b7cff"),
     ("discord-bot-eti", "Discord Bot ETI", "Bot Discord pour le référencement ETI", "si:discord", "#5865F2", "JavaScript", "#f1e05a"),
-    ("pokerogue-extension", "PokeRogue Extension", "Extension navigateur pour PokeRogue", "pokeball", "#EF4444", "JavaScript", "#f1e05a"),
+    ("maze", "Résolveur de labyrinthes", "Résout des labyrinthes en C (main gauche)", "maze", "#F59E0B", "C", "#a8b1c2"),
     ("portfolio", "Portfolio", "Mon portfolio", "browser", "#2DD4BF", "HTML", "#e34c26"),
 ]
 
@@ -83,6 +83,9 @@ def logo(name):
         "pokeball": '<circle cx="12" cy="12" r="10.5" fill="#fff"/><path d="M1.5 12a10.5 10.5 0 0 1 21 0z" fill="#EF4444"/>'
                     '<rect x="1.5" y="10.9" width="21" height="2.2" fill="#0d1117"/>'
                     '<circle cx="12" cy="12" r="3.6" fill="#0d1117"/><circle cx="12" cy="12" r="2.2" fill="#fff"/>',
+        "maze": '<g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">'
+                '<path d="M4 0H24V20M24 24H0V0"/><path d="M4 0V8M8 0V8M0 12H12M12 4V20M12 6H16M16 6V12M20 4V18M16 18H24M4 16H10M8 16V24M0 20H4"/></g>'
+                '<path class="solve" d="M2 0V10H10V2H18V14H14V22H24" pathLength="1" fill="none" stroke="#FCD34D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
         "browser": '<rect x="1.5" y="3" width="21" height="18" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/>'
                    '<path d="M1.5 7.5h21" stroke="#fff" stroke-width="1.6"/>'
                    '<circle cx="4.5" cy="5.25" r=".8" fill="#fff"/><circle cx="7" cy="5.25" r=".8" fill="#fff"/><circle cx="9.5" cy="5.25" r=".8" fill="#fff"/>'
@@ -108,8 +111,8 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
     <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
   </g>
   <g class="float">
-    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="{accent}" filter="url(#blur)" opacity=".8">{logo(logo_name)}</svg>
-    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff">{logo(logo_name)}</svg>
+    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="{accent}" color="{accent}" filter="url(#blur)" opacity=".8">{logo(logo_name)}</svg>
+    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>
   </g>
 </g>
 <rect y="{ch}" width="{w}" height="1.5" fill="url(#g)" opacity=".6"/>
@@ -122,6 +125,7 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
 </g>"""
     style = """.arrow { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translate(3px, -3px); } }
   .float { animation: float 4s ease-in-out infinite; } @keyframes float { 50% { transform: translateY(-6px); } }
+  .solve { stroke-dasharray: 1 1; animation: solve 5s ease-in-out infinite; } @keyframes solve { 0% { stroke-dashoffset: 1; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
   .ring { transform-box: fill-box; transform-origin: center; animation: ring 3.6s ease-in-out infinite; } @keyframes ring { 50% { transform: scale(1.06); opacity: .5; } }"""
     (ASSETS / "projets" / f"{slug}.svg").write_text(frame(w, h, body, style))
 
