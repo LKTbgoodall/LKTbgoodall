@@ -154,7 +154,7 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
   </g>
   <g class="float">
     <circle cx="{w / 2}" cy="{ch / 2}" r="60" fill="url(#halo)"/>
-    {f'<svg x="{w / 2 - 100}" y="6" width="200" height="140" viewBox="0 0 200 140">{portfolio_art()}</svg>' if logo_name == "portfolio" else
+    {f'<svg x="{w / 2 - 62}" y="31" width="124" height="87" viewBox="0 0 200 140">{portfolio_art()}</svg>' if logo_name == "portfolio" else
      f'<svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>'}
   </g>
 </g>
