@@ -99,7 +99,7 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
     body = f"""<defs>
   <clipPath id="cover"><path d="M18 0H{w - 18}a18 18 0 0 1 18 18V{ch}H0V18A18 18 0 0 1 18 0z"/></clipPath>
   <radialGradient id="spot" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="{accent}" stop-opacity=".55"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></radialGradient>
-  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  <radialGradient id="halo"><stop offset="0" stop-color="{accent}" stop-opacity=".7"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></radialGradient>
 </defs>
 <g clip-path="url(#cover)">
   <rect width="{w}" height="{ch}" fill="#0a0f1a"/>
@@ -111,7 +111,7 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
     <circle class="ring" cx="{w / 2}" cy="{ch / 2}" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
   </g>
   <g class="float">
-    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="{accent}" color="{accent}" filter="url(#blur)" opacity=".8">{logo(logo_name)}</svg>
+    <circle cx="{w / 2}" cy="{ch / 2}" r="60" fill="url(#halo)"/>
     <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>
   </g>
 </g>

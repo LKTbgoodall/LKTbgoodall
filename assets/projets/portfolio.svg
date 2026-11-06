@@ -16,7 +16,7 @@
 <defs>
   <clipPath id="cover"><path d="M18 0H422a18 18 0 0 1 18 18V150H0V18A18 18 0 0 1 18 0z"/></clipPath>
   <radialGradient id="spot" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#2DD4BF" stop-opacity=".55"/><stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/></radialGradient>
-  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+  <radialGradient id="halo"><stop offset="0" stop-color="#2DD4BF" stop-opacity=".7"/><stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/></radialGradient>
 </defs>
 <g clip-path="url(#cover)">
   <rect width="440" height="150" fill="#0a0f1a"/>
@@ -28,7 +28,7 @@
     <circle class="ring" cx="220.0" cy="75.0" r="116" stroke-opacity=".1" style="animation-delay:1.2s"/>
   </g>
   <g class="float">
-    <svg x="184.0" y="39.0" width="72" height="72" viewBox="0 0 24 24" fill="#2DD4BF" color="#2DD4BF" filter="url(#blur)" opacity=".8"><rect x="1.5" y="3" width="21" height="18" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M1.5 7.5h21" stroke="#fff" stroke-width="1.6"/><circle cx="4.5" cy="5.25" r=".8" fill="#fff"/><circle cx="7" cy="5.25" r=".8" fill="#fff"/><circle cx="9.5" cy="5.25" r=".8" fill="#fff"/><rect x="4.5" y="10.5" width="7" height="7.5" rx="1" fill="#fff" fill-opacity=".9"/><path d="M14 11.5h5.5M14 14.25h5.5M14 17h3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <circle cx="220.0" cy="75.0" r="60" fill="url(#halo)"/>
     <svg x="184.0" y="39.0" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0"><rect x="1.5" y="3" width="21" height="18" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M1.5 7.5h21" stroke="#fff" stroke-width="1.6"/><circle cx="4.5" cy="5.25" r=".8" fill="#fff"/><circle cx="7" cy="5.25" r=".8" fill="#fff"/><circle cx="9.5" cy="5.25" r=".8" fill="#fff"/><rect x="4.5" y="10.5" width="7" height="7.5" rx="1" fill="#fff" fill-opacity=".9"/><path d="M14 11.5h5.5M14 14.25h5.5M14 17h3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
   </g>
 </g>
