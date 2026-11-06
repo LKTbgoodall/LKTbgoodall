@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=1500&pause=400&color=A78BFA&center=true&vCenter=true&multiline=true&repeat=false&width=520&height=70&lines=%F0%9F%8E%AE+Je+cr%C3%A9e+des+jeux+%3A+Unity+%E2%80%A2+FiveM+%E2%80%A2+Roblox;%F0%9F%A6%80+En+train+d'apprendre+Rust" alt="Typing SVG" />
+<img src="assets/header.svg" width="100%" alt="LKT" />
 
 </div>
 
-## 🧑‍💻 À propos
+## <img src="assets/icons/user.svg" width="22" /> &nbsp;À propos
 
-- 🎮 Je développe des jeux et des scripts **FiveM**, **Unity** et **Roblox**
-- 🔭 En ce moment je bosse sur un **tycoon de boîte de nuit** sous Unity
-- 🦀 J'apprends le **Rust**
-- 🐧 Setup : **Arch Linux** + **VSCode**
+<img src="assets/icons/gamepad-2.svg" width="16" /> &nbsp;Je développe des jeux et des scripts **FiveM**, **Unity** et **Roblox**<br>
+<img src="assets/icons/telescope.svg" width="16" /> &nbsp;En ce moment je bosse sur un **tycoon de boîte de nuit** sous Unity<br>
+<img src="assets/icons/cpu.svg" width="16" /> &nbsp;J'apprends le **Rust**<br>
+<img src="assets/icons/terminal.svg" width="16" /> &nbsp;Setup : **Arch Linux** + **VSCode**
 
-## 🛠️ Langages
+## <img src="assets/icons/code-xml.svg" width="22" /> &nbsp;Langages
 
 <div align="center">
 <table>
@@ -28,7 +28,7 @@
 </table>
 </div>
 
-## 🎮 Moteurs & outils
+## <img src="assets/icons/wrench.svg" width="22" /> &nbsp;Moteurs & outils
 
 <div align="center">
 <table>
@@ -44,28 +44,28 @@
 </table>
 </div>
 
-## 🚀 Projets
+## <img src="assets/icons/rocket.svg" width="22" /> &nbsp;Projets
 
 | | Projet | Description | Stack |
 |:-:|---|---|---|
-| 🚓 | [**FiveM Scripts Jobs**](https://github.com/LKTbgoodall/FiveM_Scripts_Jobs) | Scripts de métiers pour serveur FiveM | ![Lua](https://img.shields.io/badge/Lua-2C2D72?logo=lua&logoColor=white) |
-| 🤖 | [**Discord Bot ETI**](https://github.com/LKTbgoodall/Discord_bot_ETI) | Bot Discord pour le référencement ETI (FiveM) | ![JavaScript](https://img.shields.io/badge/JavaScript-323330?logo=javascript&logoColor=F7DF1E) |
-| 🧩 | [**PokeRogue Extension**](https://github.com/LKTbgoodall/PokeRogue_Extension) | Extension navigateur pour PokeRogue | ![JavaScript](https://img.shields.io/badge/JavaScript-323330?logo=javascript&logoColor=F7DF1E) |
-| 🌐 | [**Portfolio**](https://github.com/LKTbgoodall/portfolio) | Mon portfolio | ![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white) |
+| <img src="assets/icons/briefcase.svg" width="18" /> | [**FiveM Scripts Jobs**](https://github.com/LKTbgoodall/FiveM_Scripts_Jobs) | Scripts de métiers pour serveur FiveM | ![Lua](https://img.shields.io/badge/Lua-2C2D72?logo=lua&logoColor=white) |
+| <img src="assets/icons/bot.svg" width="18" /> | [**Discord Bot ETI**](https://github.com/LKTbgoodall/Discord_bot_ETI) | Bot Discord pour le référencement ETI (FiveM) | ![JavaScript](https://img.shields.io/badge/JavaScript-323330?logo=javascript&logoColor=F7DF1E) |
+| <img src="assets/icons/puzzle.svg" width="18" /> | [**PokeRogue Extension**](https://github.com/LKTbgoodall/PokeRogue_Extension) | Extension navigateur pour PokeRogue | ![JavaScript](https://img.shields.io/badge/JavaScript-323330?logo=javascript&logoColor=F7DF1E) |
+| <img src="assets/icons/globe.svg" width="18" /> | [**Portfolio**](https://github.com/LKTbgoodall/portfolio) | Mon portfolio | ![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white) |
 
-## 📊 Stats
+## <img src="assets/icons/chart-column.svg" width="22" /> &nbsp;Stats
 
 <div align="center">
 
-<!-- Générées par .github/workflows/stats.yml -->
-<img height="190" src="stats/overview.svg" />
-<img height="190" src="stats/languages.svg" />
+<!-- Générées par .github/workflows/stats.yml sur la branche "stats" -->
+<img height="190" src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/stats/overview.svg" />
+<img height="190" src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/stats/languages.svg" />
 
 <img src="https://streak-stats.demolab.com?user=LKTbgoodall&theme=tokyonight&hide_border=true&ring=A78BFA&fire=A78BFA&currStreakLabel=A78BFA" />
 
 </div>
 
-## 🐍 Mes contributions se font manger
+## <img src="assets/icons/activity.svg" width="22" /> &nbsp;Mes contributions se font manger
 
 <!-- Généré par .github/workflows/snake.yml -->
 <picture>
@@ -73,5 +73,3 @@
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/output/snake-light.svg" />
   <img alt="snake" src="https://raw.githubusercontent.com/LKTbgoodall/LKTbgoodall/output/snake.svg" />
 </picture>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:2563EB,100:7C3AED&height=120&section=footer" />

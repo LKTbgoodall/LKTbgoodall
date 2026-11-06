@@ -22,9 +22,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit
+      # Publié sur une branche à part pour que le bot n'apparaisse pas dans les contributeurs
+      - name: Publier sur la branche stats
         run: |
+          cd stats
+          git init -q -b stats
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add stats
-          git diff --cached --quiet || (git commit -m "Mise à jour des stats" && git push)
+          git add . && git commit -q -m "Stats"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" stats
