@@ -20,7 +20,7 @@ PROJETS = [
     ("fivem-jobs", "FiveM Scripts Jobs", "Scripts de métiers pour serveur FiveM", "si:fivem", "#F40552", "Lua", "#6b7cff"),
     ("discord-bot-eti", "Discord Bot ETI", "Bot Discord pour le référencement ETI", "si:discord", "#5865F2", "JavaScript", "#f1e05a"),
     ("maze", "Résolveur de labyrinthes", "Résout des labyrinthes en C (main gauche)", "maze", "#F59E0B", "C", "#a8b1c2"),
-    ("portfolio", "Portfolio", "Mon portfolio", "browser", "#2DD4BF", "HTML", "#e34c26"),
+    ("portfolio", "Portfolio", "Mon portfolio", "portfolio", "#2DD4BF", "HTML", "#e34c26"),
 ]
 
 TEXT, MUTED = "#E2E8F0", "#8B93B5"
@@ -94,6 +94,45 @@ def logo(name):
     }[name]
 
 
+def portfolio_art():
+    """Illustration : porte-documents ouvert d'où sortent des planches de projets (viewBox 200x140)."""
+    def card(cx, angle, delay, sky):
+        x, y = cx - 35, 14
+        return (f'<g class="rise" style="animation-delay:{delay}s"><g transform="rotate({angle} 100 135)">'
+                f'<rect x="{x}" y="{y}" width="70" height="88" rx="6" fill="#0b1220" opacity=".35" transform="translate(2 3)"/>'
+                f'<rect x="{x}" y="{y}" width="70" height="88" rx="6" fill="#F1F5F9"/>'
+                f'<rect x="{x + 6}" y="{y + 6}" width="58" height="42" rx="3" fill="url(#{sky})"/>'
+                f'<circle cx="{x + 48}" cy="{y + 17}" r="5" fill="#FEF3C7"/>'
+                f'<path d="M{x + 6} {y + 48}l14-16 9 9 12-15 21 22z" fill="#0f766e" opacity=".85"/>'
+                f'<path d="M{x + 6} {y + 48}l10-9 12 9z" fill="#134e4a"/>'
+                f'<rect x="{x + 6}" y="{y + 56}" width="40" height="5" rx="2.5" fill="#334155"/>'
+                f'<rect x="{x + 6}" y="{y + 66}" width="52" height="3.5" rx="1.75" fill="#94A3B8"/>'
+                f'<rect x="{x + 6}" y="{y + 74}" width="30" height="3.5" rx="1.75" fill="#94A3B8"/></g></g>')
+
+    def spark(x, y, r, delay):
+        return (f'<path class="spark" style="animation-delay:{delay}s" d="M{x} {y - r}C{x + r * .15} {y - r * .15} {x + r * .15} {y - r * .15} {x + r} {y}'
+                f'C{x + r * .15} {y + r * .15} {x + r * .15} {y + r * .15} {x} {y + r}C{x - r * .15} {y + r * .15} {x - r * .15} {y + r * .15} {x - r} {y}'
+                f'C{x - r * .15} {y - r * .15} {x - r * .15} {y - r * .15} {x} {y - r}z" fill="#A5F3FC"/>')
+
+    return f'''<defs>
+  <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
+  <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0891B2"/><stop offset="1" stop-color="#A5F3FC"/></linearGradient>
+  <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#F472B6"/></linearGradient>
+  <linearGradient id="back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#115e59"/><stop offset="1" stop-color="#0b3b38"/></linearGradient>
+  <linearGradient id="flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14B8A6"/><stop offset="1" stop-color="#0F766E"/></linearGradient>
+  <radialGradient id="shadow"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="100" cy="135" rx="84" ry="6" fill="url(#shadow)"/>
+<rect x="34" y="42" width="46" height="18" rx="5" fill="url(#back)"/>
+<rect x="28" y="50" width="144" height="84" rx="8" fill="url(#back)"/>
+{card(72, -15, .3, "sky3")}{card(128, 15, .45, "sky2")}{card(100, 0, .6, "sky1")}
+<g transform="translate(0 6)"><path d="M26 70H174a6 6 0 0 1 5.9 7.1L171.6 121.3a8 8 0 0 1-7.9 6.7H36.3a8 8 0 0 1-7.9-6.7L20.1 77.1A6 6 0 0 1 26 70z" fill="url(#flap)"/>
+<path d="M27 71.2H173" stroke="#5EEAD4" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round"/>
+<rect x="80" y="92" width="40" height="13" rx="4" fill="#042f2e" fill-opacity=".35"/>
+<rect x="86" y="97" width="28" height="3" rx="1.5" fill="#99F6E4" fill-opacity=".8"/></g>
+{spark(30, 26, 7, 1.1)}{spark(172, 30, 5, 1.3)}{spark(160, 12, 3.5, 1.5)}{spark(44, 8, 3, 1.7)}'''
+
+
 def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
     w, h, ch = 440, 260, 150  # ch : hauteur du visuel
     body = f"""<defs>
@@ -112,7 +151,8 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
   </g>
   <g class="in">
     <circle cx="{w / 2}" cy="{ch / 2}" r="60" fill="url(#halo)"/>
-    <svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>
+    {f'<svg x="{w / 2 - 100}" y="6" width="200" height="140" viewBox="0 0 200 140">{portfolio_art()}</svg>' if logo_name == "portfolio" else
+     f'<svg x="{w / 2 - 36}" y="{ch / 2 - 36}" width="72" height="72" viewBox="0 0 24 24" fill="#fff" color="#E2E8F0">{logo(logo_name)}</svg>'}
   </g>
 </g>
 <rect y="{ch}" width="{w}" height="1.5" fill="url(#g)" opacity=".6"/>
@@ -124,6 +164,8 @@ def project_card(slug, title, desc, logo_name, accent, lang, color, delay):
   <svg class="arrow" x="{w - 46}" y="{ch + 24}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
 </g>"""
     style = """.solve { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: solve 2.4s ease-in-out .6s forwards; } @keyframes solve { to { stroke-dashoffset: 0; } }
+  .rise { animation: rise .8s cubic-bezier(.2,.9,.3,1.1) backwards; } @keyframes rise { from { transform: translateY(46px); opacity: 0; } }
+  .spark { transform-box: fill-box; transform-origin: center; animation: spark .6s ease-out backwards; } @keyframes spark { from { transform: scale(0) rotate(-90deg); opacity: 0; } }
   .ring { transform-box: fill-box; transform-origin: center; animation: ring 1s ease-out backwards; } @keyframes ring { from { transform: scale(.6); opacity: 0; } }"""
     (ASSETS / "projets" / f"{slug}.svg").write_text(frame(w, h, body, style))
 

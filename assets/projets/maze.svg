@@ -7,6 +7,8 @@
   .in { animation: in .6s cubic-bezier(.2,.9,.3,1.2) backwards; transform-box: fill-box; transform-origin: center; }
   @keyframes in { from { opacity: 0; transform: translateY(14px) scale(.85); } }
   .solve { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: solve 2.4s ease-in-out .6s forwards; } @keyframes solve { to { stroke-dashoffset: 0; } }
+  .rise { animation: rise .8s cubic-bezier(.2,.9,.3,1.1) backwards; } @keyframes rise { from { transform: translateY(46px); opacity: 0; } }
+  .spark { transform-box: fill-box; transform-origin: center; animation: spark .6s ease-out backwards; } @keyframes spark { from { transform: scale(0) rotate(-90deg); opacity: 0; } }
   .ring { transform-box: fill-box; transform-origin: center; animation: ring 1s ease-out backwards; } @keyframes ring { from { transform: scale(.6); opacity: 0; } }
 </style>
 <rect width="440" height="260" rx="18" fill="#0d1117"/>
